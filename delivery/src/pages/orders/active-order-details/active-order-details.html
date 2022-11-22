@@ -1,0 +1,115 @@
+<!--
+  Generated template for the ActiveOrderDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="bg1">
+	<ion-navbar>
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>{{pageTitle}}</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<div *ngIf = "showTemplate == 'confirmation'" padding margin >
+		<div class="alert-cont shadow">
+			<ion-row margin padding-bottom>
+				<ion-col col-12 no-padding text-center class="icon-cont">
+					<ion-icon name="md-clipboard"></ion-icon>
+				</ion-col>
+				<ion-col col-12 no-padding text-center>
+					You have received new<br/> order from Medipocket
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col col-6 no-padding>
+					<button ion-button class="custom accept" full (click) = "acceptOrder()">Accept</button>
+				</ion-col>
+				<ion-col col-6 no-padding>
+					<button ion-button class="custom reject" color="danger" full (click) = "rejectOrder()">Reject</button>
+				</ion-col>
+			</ion-row>
+		</div>
+	</div>
+	<div class="current_order_cont" *ngIf="showTemplate == 'details'">
+		<ion-row>
+			<ion-col col-12 no-padding>
+				<div class="orderid-cont" text-center margin-bottom>
+					Order #{{currentOrder.id}}
+				</div>
+			</ion-col>
+		</ion-row>
+		<ion-row padding-bottom class="pickup-row">
+			<ion-col col-3 no-padding>
+				Pickup
+			</ion-col>
+			<ion-col col-9 no-padding>
+				<div class="pickup_cont">
+					<div class="name">
+						{{currentOrder.pickup.name}}
+					</div>
+					<div class="address">
+						{{currentOrder.pickup.address}}
+					</div>
+				</div>
+			</ion-col>
+		</ion-row>
+		<ion-row padding-top padding-bottom class="delivery-row">
+			<ion-col col-3 no-padding>
+				Delivery
+			</ion-col>
+			<ion-col col-9 no-padding>
+				<div class="delivery_cont">
+					<div class="name">
+						{{currentOrder.delivery.name}}
+					</div>
+					<div class="address">
+						{{currentOrder.delivery.address}}
+					</div>
+				</div>
+			</ion-col>
+		</ion-row>
+		
+		<ion-row padding-top *ngIf = "currentOrder.status == 'rejected' || currentOrder.status == 'cancelled'" padding-top padding-bottom class="bg-white">
+			<ion-col col-12 no-padding text-center>
+				Order {{currentOrder.status}}
+			</ion-col>
+		</ion-row>
+		<ion-row *ngIf = "currentOrder.status == 'init' || currentOrder.status == 'accepted'" padding-top padding-bottom class="bg-white">
+			<ion-col col-6 no-padding text-right>
+				<button type="button" class="custom" ion-button no-margin (click) = "goto('pickup')">Pickup</button>
+			</ion-col>
+			<ion-col col-6 no-padding text-left padding-left class="cancel-order">
+				<a href="javascript:void(0);" no-margin (click) = "cancelOrder()">Cancel order</a>
+			</ion-col>
+		</ion-row>	
+		<ion-row *ngIf = "currentOrder.status == 'picked'" padding-top padding-bottom class="bg-white">
+			<ion-col col-12 no-padding text-center>
+				<button type="button" class="custom" ion-button no-margin (click) = "goto('delivery')">Delivery</button>
+			</ion-col>
+		</ion-row>	
+		<ion-row padding-top class="status-cont">
+			<ion-col col-12 no-padding>
+				<ion-row class="bg-main header">
+					<ion-col col-6 no-padding>
+						Status
+					</ion-col>
+					<ion-col col-6 no-padding>
+						time
+					</ion-col>
+				</ion-row>
+				<ion-row *ngFor="let log of currentOrder.log; let in = index; let isOdd=odd; let isEven=even; let isLast=last" [class.odd]="isEven" [class.even]="isOdd" [class.last]="isLast" [class.first]="isFirst" class="result">
+					<ion-col col-6 no-padding>
+						Order {{log.status}}
+					</ion-col>
+					<ion-col col-6 no-padding>
+						{{timeago(log.datetime)}}
+					</ion-col>
+				</ion-row>
+			</ion-col>
+		</ion-row>	
+	</div>
+</ion-content>

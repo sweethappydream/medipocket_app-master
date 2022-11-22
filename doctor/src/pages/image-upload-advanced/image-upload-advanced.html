@@ -1,0 +1,88 @@
+<!--
+  Generated template for the ImageUploadAdvancedPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="bg1">
+  <ion-navbar>
+    <ion-title padding-left>{{pagetitle}}</ion-title>
+    <ion-buttons end>
+		<button ion-button icon-only (click)="dismiss()">
+			<ion-icon name="close"></ion-icon>
+		</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+	<form [formGroup]="imageadvFormData">
+		<ion-row>
+			<ion-col col-12 no-padding class="posRelative">
+				<span class="error-cont" *ngIf="imageadvFormData.get('title').hasError('required') && (imageadvFormData.get('title').touched || displayError)" >
+					<ion-icon name="alert"></ion-icon>
+					<span class="error-hover">Required</span>
+				</span>
+				<ion-label stacked>Title *</ion-label>
+				<ion-item no-padding class="item-name">
+					<ion-input type="text" placeholder="" formControlName="title" ></ion-input>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-row *ngIf="purpose == 'education'">
+			<ion-col col-12 no-padding class="posRelative">
+				<span class="error-cont" *ngIf="imageadvFormData.get('univ').hasError('required') && (imageadvFormData.get('univ').touched || displayError)" >
+					<ion-icon name="alert"></ion-icon>
+					<span class="error-hover">Required</span>
+				</span>
+				<ion-label stacked>University/ Institution *</ion-label>
+				<ion-item no-padding class="item-name">
+					<ion-input type="text" placeholder="" formControlName="univ" ></ion-input>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col col-12 no-padding class="posRelative">
+				<span class="error-cont" *ngIf="imageadvFormData.get('comment').hasError('required') && (imageadvFormData.get('comment').touched || displayError)" >
+					<ion-icon name="alert"></ion-icon>
+					<span class="error-hover">Required</span>
+				</span>
+				<ion-label stacked>Comment *</ion-label>
+				<ion-item no-padding class="item-name">
+					<ion-textarea type="text" placeholder="" formControlName="comment" ></ion-textarea>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-row margin-top>
+			<ion-col col-6 no-padding *ngIf="!uploadedimages.length">
+				<ion-label>{{imagelabel}} *</ion-label>
+				<single-image-upload></single-image-upload>
+			</ion-col>
+			<ion-col col-6 no-padding *ngIf="uploadedimages.length">
+				<ion-label>{{imagelabel}} *</ion-label>
+				<div class="images-wrapper" padding-bottom>
+			        <ion-row>
+			            <ion-col col-12 no-padding class="image-wrapper" *ngFor="let image of uploadedimages; let in = index;">
+			            	<div class="remove-image-cont">
+								<ion-icon class="remove-image" name="close" (click)="removeImage(image, in)"></ion-icon>
+							</div>
+			                <div class="image" [style.background-image]="image.path">
+			                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=""/>
+			                </div>
+			            </ion-col>
+			        </ion-row>
+			    </div>
+			</ion-col>
+		</ion-row>
+	</form>
+</ion-content>
+<ion-footer>
+	<ion-row>
+		<ion-col col-12 no-padding>
+			<button class="custom" ion-button block (click)="submit()">
+		        Submit
+		    </button>
+		</ion-col>
+	</ion-row>
+</ion-footer>

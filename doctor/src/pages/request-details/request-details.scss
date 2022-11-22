@@ -1,0 +1,91 @@
+page-request-details {
+	.search-result-cont .item {
+		border-bottom: 1px solid #cdcdcd;
+	}
+	.search-result-cont .item .item-inner {
+		border-bottom: none;
+	}
+	.search-result-cont .item .item-inner .label {
+		margin: 8px 8px 8px 0px;
+	}
+	.search-result-cont .list {
+		border-top: 1px solid #cdcdcd;
+	}
+	.search-result-cont {
+		max-height: 200px;
+		overflow-y: scroll;
+		margin-top: 2px;
+	}
+	.spinner-cont {
+		position: absolute;
+	    z-index: 9;
+	    background: #fff;
+	    padding: 5px 10px;
+	}
+	.search-result-cont .item.item-ios {
+	    padding-left: 30px;
+	}
+	.ac-label {
+		display: block;
+		font-weight: 500;
+	}
+	.patient-details .name {
+		font-size: 1.5rem;
+		font-weight: 500;
+		color: #fff;
+	}
+	.patient-details {
+		color: #fff;
+	}
+	.added-drugs-cont {
+		background: #fff;
+	}
+	.drug-name {
+		font-size: 1.4rem;
+		color: #00d6ba;
+		text-transform: capitalize;
+	}
+	.added-drugs-cont .row {
+		border: 1px solid #dcd2d2;
+	}
+	.pharmacy-name {
+		font-size: 2.2rem;
+		color: #00d6ba;
+	}
+	.padding-right-mini {
+		padding-right: 8px !important;
+	}
+	.padding-left-mini {
+		padding-left: 8px !important;
+	}
+	.button.custom.outline {
+		color: #00d6ba;
+		background: #fff;
+		border: 1px solid #00d6ba;
+		font-size: 1.2rem;
+	}
+	.button.custom {
+		height: 3.4rem;
+	}
+	.doctor-cont img {
+		width: 48px;
+		border-radius: 100%;
+		border: 1px solid #00d6ba;
+		height: 48px;
+	}
+	.doctor-cont .spec {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+	}
+	.doctor-cont {
+		padding: 8px;
+		margin: 16px;
+		background: #fff;
+	}
+	.remove-drug {
+		display: flex;
+	    height: 100%;
+	    align-items: center;
+	}
+}

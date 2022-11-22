@@ -1,0 +1,84 @@
+<!--
+  Generated template for the PastOrdersPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="bg1">
+	<ion-navbar>
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>Past Order</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+	<!--<ion-row>
+		<ion-col col-12 padding *ngFor="let order of pastorders; let in = index; let isOdd=odd; let isEven=even; let isLast=last" [class.odd]="isEven" [class.even]="isOdd" [class.last]="isLast" [class.first]="isFirst" class="shadow" margin-bottom (click) = openOrder(in)>
+			<div class="order-id">
+				Order #{{order.id}}
+			</div>
+			<div class="patient-name">
+				Patient name: {{order.patient_name}}
+			</div>
+			<div class="order-status">
+				Status: {{order.status}}
+			</div>
+		</ion-col>
+
+	</ion-row>
+	<ion-row *ngIf = "!pastorders.length">
+		<ion-col col-12 padding class="shadow">
+			No orders found!
+		</ion-col>
+	</ion-row>-->
+
+	<mbsc-form class="md-schedule">
+			<div>
+				<mbsc-segmented-group [(ngModel)]="filters.range" (change)="onChange()">
+					<mbsc-segmented value="today">Today</mbsc-segmented>
+					<mbsc-segmented value="week">Last 7 Days</mbsc-segmented>
+					<mbsc-segmented value="custom" (click)="mbscRange.instance.show()">Custom</mbsc-segmented>
+				</mbsc-segmented-group>
+		
+				<div mbsc-range [(ngModel)]="filters.customRange" [mbsc-options]="rangeSettings" #mbscRange="mobiscroll" (onSet)="onChange()"></div>
+		
+			<!--	<mbsc-switch [(ngModel)]="filters.calls" (change)="onChange()">Show calls</mbsc-switch>
+				<mbsc-switch [(ngModel)]="filters.meetings" (change)="onChange()">Show meetings</mbsc-switch>-->
+			</div>
+			<mbsc-form-group no-margin>
+				<!--<mbsc-form-group-title>My Schedule</mbsc-form-group-title>-->
+				<div class="mbsc-empty" *ngIf="filteredData.length == 0 && !showspinner">
+					<h3>No Order Found !!!</h3>
+				</div>
+				<div *ngIf="showspinner" class="mbsc-lv-loading mbsc-show-lv-loading" ><span class="mbsc-ic mbsc-ic-loop2"></span></div>
+				<mbsc-listview [options]="listviewSettings" class="order-list">
+					<mbsc-listview-item *ngFor="let item of filteredData" (click)="acceptOrder(item)">
+						<h4>{{ item.order_type || "&nbsp;" }}
+							<small float-right>
+								{{ parseUTCTime(item.created_on) }}
+							</small>
+						</h4>
+						<h4 >
+							<small *ngIf="item.pharmacy !== undefined">{{ item.pharmacy.name }}</small>
+							
+						<!--	<small *ngIf="item.total_saving !== undefined && item.total_saving > 0" float-right class="text-green">&nbsp;<b> Saved: ${{ item.total_saving | number : '1.2-2' }}</b></small>-->
+	
+							<small *ngIf="item.total_amount !== undefined" float-right><b>${{ item.total_amount | number : '1.2-2' }}</b></small>
+	
+						</h4>
+						<h4 >
+							<small>Address: {{ item.pharmacy.street1 }} &nbsp; {{ item.pharmacy.street2 }}&nbsp; {{ item.pharmacy.state }}&nbsp; {{ item.pharmacy.zip }}</small>
+						</h4>	
+						<h4 *ngIf="item.rxPickup && item.rx && item.rx.length > 0" text-right>
+						
+							<span class="pill pill-default">Rx Pickup</span>
+						</h4>
+						
+					</mbsc-listview-item>
+				</mbsc-listview>
+			</mbsc-form-group>
+		</mbsc-form>
+
+</ion-content>

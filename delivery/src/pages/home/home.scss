@@ -1,0 +1,70 @@
+page-home {
+	
+	
+	.content {
+		background-color: #fafafa;
+	}
+	.logo-image{
+
+		width: 80vw;
+		margin: 0 auto;
+		padding: 32px;
+	}
+	.signin-cont-outer{
+		width: 80vw;
+		margin: 0 auto;
+		padding: 16px;
+	}
+	.bg-color-pink{
+		background: #F42F66;
+	}
+	.bg-color-blue{
+		background: #3FB6FA;
+	}
+
+	#map {
+		height: 400px;
+		width: 100%;
+	}
+	#map_cont {
+		position: relative;
+	}
+	.duration_cont {
+		position: absolute;
+	    z-index: 9;
+	    background: #fff;
+	    padding: 8px 12px;
+	    margin: 12px;
+	    border-radius: 4px;
+	    top: 20%;
+	    font-size: 1.2rem;
+	}
+	.pharmacy_location_outer {
+		position: absolute;
+		padding: 12px;
+		width: 100%;
+		z-index: 9;
+		width: 100%;
+	}
+	.pharmacy_location {
+		padding: 8px;
+		text-align: center;
+		background: #fff;
+	}
+	.pharmacy_location .name {
+		color: #3dcfbe;
+		font-size: 2.2rem;
+	}
+	.drive_outer {
+		position: absolute;
+		width: 100%;
+		bottom: 12px;
+	}
+	.drive {
+		justify-content: center;
+		display: flex;
+	}
+	.drive .button {
+		width: 100px;
+	}
+}

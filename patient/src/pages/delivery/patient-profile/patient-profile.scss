@@ -1,0 +1,266 @@
+page-patient-profile {
+	.membership-signup-cont {
+		.scroll-content {
+			// margin-bottom: 115px !important;
+		}
+	}
+	.content {
+		background: #f9f9f9;
+	}
+	.item-block {
+		min-height: 3.4rem;
+		font-size: 1.2rem;
+		margin-top: 8px;
+	}
+	.text-input {
+		margin: 8px;
+	}
+	.datetime {
+		padding: 8px;
+	}
+	.displayMode .item.item-block .item-inner {
+		border: none !important;
+	}
+
+	/*.item.item-block */
+	.item-inner {
+		border: 1px solid #00d6ba !important;
+		border-radius: 3px;
+	}
+	.label {
+		color: #797979;
+		font-size: 1.4rem;
+	}
+	.button.custom {
+		background: #00d6ba;
+		margin: 0px;
+	}
+	.button.custom:hover {
+		background: #00d6ba;
+	}
+	.card {
+		width: 100% !important;
+	}
+	.profile_image {
+		background-image: url(../assets/imgs/medidelivery/home_bg.png);
+		background-repeat: no-repeat;
+		background-size: cover;
+		position: relative;
+		background-position: top center;
+		margin: 0 auto;
+		border-radius: 50%;
+	}
+	.profile_name {
+		text-align: center;
+		font-weight: 500;
+		font-size: 2rem;
+	}
+	.item {
+		padding-left: 0px !important;
+		margin-top: 0px !important;
+	}
+	.item-inner {
+		padding-right: 0px !important;
+	}
+	.label {
+		margin: 10px 8px 10px 0px !important;
+	}
+	.flexinital {
+		flex: initial;
+		font-weight: 500;
+	}
+	.gender {
+		border: 1px #00d6ba solid;
+	}
+	.mbsc-segmented-item {
+		color: #000000;
+		padding-top: 4px;
+		padding-bottom: 4px;
+	}
+	.mbsc-segmented .active {
+		background-color: #00d6ba;
+		color: #ffffff;
+	}
+	.mbsc-fr-btn {
+		background-color: #00d6ba !important;
+	}
+
+	.no-border {
+		border: none !important;
+	}
+	.no-border .item-inner {
+		border: none !important;
+	}
+
+	.posRelative .item-inner {
+		border-bottom-color: #32db64 !important;
+		-webkit-box-shadow: none !important;
+		box-shadow: none !important;
+	}
+
+	.footer {
+		background: #ffffff;
+	}
+	.item.male mbsc-segmented[value='male'],
+	.item.female mbsc-segmented[value='female'] {
+		background-color: #00d6ba;
+		color: #fff;
+	}
+	.mbsc-input-wrap {
+		border: 1px solid #00d6ba;
+		border-radius: 3px;
+	}
+	.mbsc-input .mbsc-input-wrap input {
+		height: 2.4em;
+		padding: 0px 8px;
+	}
+	.mbsc-input-wrap .mbsc-select-ic {
+		top: 0.75em;
+	}
+	.mbsc-segmented .mbsc-segmented-item {
+		width: 50%;
+	}
+	.mbsc-form-group {
+		margin: 0px;
+	}
+	.custom-input-group .item-inner {
+		border-radius: 3px 0px 0px 3px;
+	}
+	.custom-input-group .mbsc-input .mbsc-input-wrap input {
+		height: 3.3rem;
+	}
+	.custom-input-group .mbsc-input-wrap {
+		border-radius: 0px 3px 3px 0px;
+	}
+	.custom-input-group .mbsc-ios .mbsc-control-w {
+		margin: 0px;
+		background: #00d6ba;
+		color: #fff;
+	}
+	.mbsc-ios .mbsc-control-w:before,
+	.mbsc-ios .mbsc-control-w:after {
+		border: 0px;
+	}
+	.images-wrapper {
+		font-size: 0;
+		.image-wrapper {
+			display: inline-block;
+			margin: 0;
+			width: 33.3333%;
+			box-sizing: border-box;
+			padding: 1px;
+			position: relative;
+			.remove-image-cont {
+				text-align: center;
+				color: #fff;
+				z-index: 9999;
+				font-size: 1.2rem;
+				padding: 8px;
+				z-index: 100;
+				position: absolute;
+				bottom: 0px;
+				/* width: 100%; */
+				/* background: #d8c1c1; */
+				right: 8px;
+				z-index: 9999;
+				border-radius: 50%;
+				width: 40px;
+				height: 40px;
+				background: red;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border: 3px solid #fff;
+			}
+			ion-spinner {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				* {
+					stroke: white;
+				}
+			}
+			.image {
+				position: relative;
+				background-size: cover;
+				background-position: center center;
+				border-radius: 50%;
+				img {
+					width: 100%;
+					&.uploading {
+						background: rgba(0, 0, 0, 0.2);
+					}
+				}
+				ion-icon {
+					font-size: 50px;
+					position: absolute;
+					transform: translate(-50%, -50%);
+					top: 50%;
+					left: 50%;
+					color: white;
+				}
+				.progress-bar {
+					height: 6px;
+					width: 100%;
+					position: absolute;
+					bottom: 0px;
+					overflow: hidden;
+					.progress {
+						background: map_get($colors, 'primary');
+						height: 100%;
+					}
+				}
+			}
+
+			&.add-image-btn .image {
+				background: #ddd;
+			}
+		}
+	}
+	.mbsc-segmented-content {
+		border: none !important;
+	}
+	.displayMode {
+		.item.male mbsc-segmented[value='male'] .mbsc-segmented-content,
+		.item.female mbsc-segmented[value='female'] .mbsc-segmented-content {
+			background-color: #00d6ba !important;
+			color: #fff !important;
+		}
+	}
+
+	.custom_card_header {
+		font-size: 1.2rem !important;
+		color: #797979 !important;
+		padding: 16px !important;
+	}
+	.no-radius {
+		border-radius: 0 !important;
+	}
+	.no-radius .image {
+		border-radius: 0 !important;
+	}
+
+	.toolbar-title {
+		font-size: 1.7rem;
+		font-weight: normal;
+		color: #fff;
+		text-transform: capitalize;
+		padding: 0px 0px 0px 10px;
+	}
+	.bg1 {
+		background: #109c8a !important;
+	}
+	.custom-input-group .mbsc-ios .mbsc-control-w {
+		margin: 0px;
+		background: #109c8a;
+		color: #fff;
+	}
+	.mbsc-input-wrap {
+		border: 1px solid #109c8a;
+		border-radius: 3px;
+	}
+}
+.mbsc-fr-btn1.mbsc-fr-btn-e.mbsc-fr-btn {
+	color: #32db64;
+}

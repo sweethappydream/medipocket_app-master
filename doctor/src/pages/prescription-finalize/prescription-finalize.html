@@ -1,0 +1,118 @@
+<!--
+  Generated template for the PrescriptionFinalizePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="bg1">
+  <ion-navbar>
+    <ion-title padding-left>Prescription</ion-title>
+    <ion-buttons end>
+		<button ion-button icon-only (click)="dismiss()">
+			<ion-icon name="close"></ion-icon>
+		</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+	<div class="prescription-cont">
+		<ion-row>
+			<ion-col col-12 no-padding>
+				<div class="head">
+					Hospital / Clinical name
+				</div>
+				<div class="desc">
+					500 s Los Robles Ave, Pasadena, Ca-91101
+				</div>
+			</ion-col>
+		</ion-row>
+		<ion-row margin-top>
+			<ion-col col-12 no-padding>
+				<div class="head">
+					{{currOrder.doctor.name}}
+				</div>
+				<div class="desc" margin-top>
+					Patient name: {{currOrder.patient.name}}
+				</div>
+				<div class="desc">
+					DOB: {{ parseDOB(currOrder.patient.dob) }}
+				</div>
+			</ion-col>
+		</ion-row>
+
+		<ion-row margin-top *ngIf = "currOrder.request_status == 'eprescription' || currOrder.request_status == 'need_consultation'">
+			<ion-col col-12 class="shadow" padding>
+				<div class="head">
+					Status
+				</div>
+				<div class="desc" *ngIf = "currOrder.request_status == 'eprescription'">
+					Approved e-prescription
+				</div>
+				<div class="desc" *ngIf = "currOrder.request_status == 'need_consultation'">
+					Need Consultaion
+				</div>
+			</ion-col>
+		</ion-row>
+
+		<ion-row margin-top>
+			<ion-col col-12 no-padding>
+				<div class="head">
+					{{currOrder.order.pharmacy.name}}
+				</div>
+				<div class="desc">
+					<span *ngIf ="currOrder.order.pharmacy.street1">{{currOrder.order.pharmacy.street1}}</span>
+					<span *ngIf ="currOrder.order.pharmacy.street2">,&nbsp;{{currOrder.order.pharmacy.street2}}</span>
+					<span *ngIf ="currOrder.order.pharmacy.state">,&nbsp;{{currOrder.order.pharmacy.state}}</span>
+					<span *ngIf ="currOrder.order.pharmacy.zip">,&nbsp;{{currOrder.order.pharmacy.zip}}</span>
+				</div>
+			</ion-col>
+		</ion-row>
+	</div>
+	<div class="prescription-list" margin-top>
+		<ion-row class="heading">
+			<ion-col col-3>
+				Name
+			</ion-col>
+			<ion-col col-3>
+				Dosage
+			</ion-col>
+			<ion-col col-3>
+				Quantity
+			</ion-col>
+			<ion-col col-3>
+				Usage
+			</ion-col>
+		</ion-row>
+		<ion-row *ngFor="let drugkey of Object.keys(create_order.doctor_suggested_medications); let in = index; let isOdd=odd; let isEven=even; let isLast=last" [class.odd]="isEven" [class.even]="isOdd" [class.last]="isLast" [class.first]="isFirst" margin-bottom class="desc">
+			<ion-col col-3>
+				{{create_order.doctor_suggested_medications[drugkey].LN}}
+			</ion-col>
+			<ion-col col-3>
+				{{create_order.doctor_suggested_medications[drugkey].Strength}}
+			</ion-col>
+			<ion-col col-3>
+				{{create_order.doctor_suggested_medications[drugkey].QtySelected.qty}}&nbsp;{{create_order.doctor_suggested_medications[drugkey].DosageForm}}
+			</ion-col>
+			<ion-col col-3>
+				<div *ngIf ="create_order.doctor_suggested_medications[drugkey].usage">
+					<span *ngIf = "create_order.doctor_suggested_medications[drugkey].usage.morning">{{create_order.doctor_suggested_medications[drugkey].usage.morning}}</span>-<span *ngIf = "create_order.doctor_suggested_medications[drugkey].usage.noon">{{create_order.doctor_suggested_medications[drugkey].usage.noon}}</span>-<span *ngIf = "create_order.doctor_suggested_medications[drugkey].usage.evening">{{create_order.doctor_suggested_medications[drugkey].usage.evening}}</span>-<span *ngIf = "create_order.doctor_suggested_medications[drugkey].usage.night">{{create_order.doctor_suggested_medications[drugkey].usage.night}}</span>
+				</div>
+			</ion-col>
+		</ion-row>
+
+	</div>
+</ion-content>
+<ion-footer>
+	<ion-row>
+		<ion-col col-12 no-padding>
+			<button class="custom" ion-button block (click)="close()" *ngIf="pagefrom == 'past'">
+                Close
+            </button>
+            <button class="custom" ion-button block (click)="submit()" *ngIf="pagefrom != 'past'" [disabled] = "submitted">
+                <ion-spinner name="dots" class="white" *ngIf="submitted"></ion-spinner>&nbsp;Submit
+            </button>
+		</ion-col>
+	</ion-row>
+</ion-footer>

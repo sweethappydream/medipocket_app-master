@@ -1,0 +1,38 @@
+page-drug-spec {
+	.patient-details .name {
+		font-size: 1.5rem;
+		font-weight: 500;
+		color: #fff;
+	}
+	.patient-details {
+		color: #fff;
+	}
+	.item {
+		min-height: 4rem;
+	}
+	.item .text-input {
+		margin: 8px;
+		font-size: 1.3rem;
+	}
+	.label {
+		padding-bottom: 6px;
+	}
+	.drug-cont {
+		background: #fff;
+	}
+	.item-inner {
+		border: 1px solid #dedede;
+	}
+	.drug-name {
+		font-size: 1.5rem;
+		color: #00d6ba;
+		text-transform: capitalize;
+	}
+	.drug-name span {
+		font-size: 1.2rem;
+		color: #000;
+	}
+	.label {
+		color: #9a9898;
+	}
+}

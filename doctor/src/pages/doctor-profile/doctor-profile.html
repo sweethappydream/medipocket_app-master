@@ -1,0 +1,372 @@
+<!--
+  Generated template for the DoctorProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header class="bg1">
+	<ion-navbar>
+		<ion-buttons left>
+			<button ion-button menuToggle>
+				<ion-icon name="menu"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-title>Profile</ion-title>
+		<ion-buttons right>
+			<button ion-button icon-only color="royal">
+				<ion-spinner name="crescent" class="white" *ngIf="pageSpinner"></ion-spinner>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding [hidden] = "pageSpinner">
+	<form [formGroup]="profileFormData" class="doctor-profile-form">
+		<ion-row margin-bottom>
+			<ion-col col-5 no-padding padding-right *ngIf="!uploadedAvatar.length">
+				<single-image-upload></single-image-upload>
+			</ion-col>
+			<ion-col col-5 no-padding padding-right *ngIf="uploadedAvatar.length">
+				<div class="images-wrapper" padding-bottom>
+			        <ion-row>
+			            <ion-col col-12 no-padding class="image-wrapper" *ngFor="let image of uploadedAvatar; let in = index;">
+			            	<div class="remove-image-cont">
+								<ion-icon class="remove-image" name="close" (click)="removeAvatar(image, in)"></ion-icon>
+							</div>
+							{{image.path | json}}
+			                <div class="image" [style.background-image]="image.path">
+			                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=""/>
+			                </div>
+			            </ion-col>
+			        </ion-row>
+			    </div>
+			</ion-col>
+			<ion-col col-7 no-padding class="posRelative name-cont">
+				<div class="name-cont-inner posRelative">
+					<span class="error-cont" *ngIf="profileFormData.get('name').hasError('required') && (profileFormData.get('name').touched || displayError)" >
+						<ion-icon name="alert"></ion-icon>
+						<span class="error-hover">Required</span>
+					</span>
+					<ion-item no-padding class="item-name">
+						<ion-input type="text" placeholder="Your Name" formControlName="name" ></ion-input>
+					</ion-item>
+				</div>
+			</ion-col>
+		</ion-row>
+		<fieldset margin-bottom padding><legend>General info</legend>
+			<ion-row>
+				<ion-col col-12 no-padding class="posRelative name-cont">
+					<div class="name-cont-inner posRelative">
+						<span class="error-cont" *ngIf="profileFormData.get('email').hasError('required') && (profileFormData.get('email').touched || displayError)" >
+							<ion-icon name="alert"></ion-icon>
+							<span class="error-hover">Required</span>
+						</span>
+						<ion-label stacked>Email *</ion-label>
+						<ion-item no-padding class="item-name">
+							<ion-input type="email" placeholder="Your Email" formControlName="email" [disabled] = "true" ></ion-input>
+						</ion-item>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col col-12 no-padding class="posRelative name-cont">
+					<div class="name-cont-inner posRelative">
+						<span class="error-cont" *ngIf="profileFormData.get('phone').hasError('required') && (profileFormData.get('phone').touched || displayError)" >
+							<ion-icon name="alert"></ion-icon>
+							<span class="error-hover">Required</span>
+						</span>
+						<ion-label stacked>Phone &nbsp;
+						<span class="mp-text-green" *ngIf="this.profileFormData.value.phone_verified !== undefined && this.profileFormData.value.phone_verified == true">
+							&nbsp;<ion-icon color="success" name="checkmark-circle"></ion-icon> <small>&nbsp;Verified</small></span>
+						
+						<span (click)="openVerifyWindow()" class="mp-text-red"
+							*ngIf="this.profileFormData.value.phone_verified == undefined || this.profileFormData.value.phone_verified == false">
+							&nbsp;<ion-icon color="danger" name="close-circle"></ion-icon><small>&nbsp;Not Verified</small></span>
+						
+						<span *ngIf="this.profileFormData.value.phone_verified == undefined || this.profileFormData.value.phone_verified == false">
+							&nbsp;<a href="javascript:void(0)" class="mp-text-green" (click)="openVerifyWindow()">
+								Verify Now
+							</a>
+						</span>
+					</ion-label>
+						<ion-item no-padding class="item-name">
+							<ion-input type="tel" placeholder="Your Phone" formControlName="phone"></ion-input>
+						</ion-item>
+					</div>
+				</ion-col>
+			</ion-row>
+			<mbsc-form-group>
+				<ion-row>
+				<ion-col col-12 no-padding class="posRelative name-cont">
+					<div class="name-cont-inner posRelative">
+						<span class="error-cont" *ngIf="profileFormData.get('country').hasError('required') && (profileFormData.get('country').touched || displayError)" >
+							<ion-icon name="alert"></ion-icon>
+							<span class="error-hover">Required</span>
+						</span>
+						<ion-label stacked>Country *</ion-label>
+						<mbsc-select formControlName="country" [options]="countrySettings" #mbscRemoteCoun="mobiscroll" placeholder="Please Select..."></mbsc-select>
+					</div>
+				</ion-col>
+			</ion-row>
+		    <ion-row>
+				<ion-col col-12 no-padding class="posRelative name-cont">
+					<div class="name-cont-inner posRelative">
+						<span class="error-cont" *ngIf="profileFormData.get('state').hasError('required') && (profileFormData.get('state').touched || displayError)" >
+							<ion-icon name="alert"></ion-icon>
+							<span class="error-hover">Required</span>
+						</span>
+						<ion-label stacked>State *</ion-label>
+						<mbsc-select formControlName="state" [options]="stateSettings" #mbscRemoteReg="mobiscroll" placeholder="Please Select..."></mbsc-select>
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col col-12 no-padding class="posRelative name-cont">
+					<div class="name-cont-inner posRelative">
+						<span class="error-cont" *ngIf="profileFormData.get('city').hasError('required') && (profileFormData.get('city').touched || displayError)" >
+							<ion-icon name="alert"></ion-icon>
+							<span class="error-hover">Required</span>
+						</span>
+						<ion-label stacked>City *</ion-label>
+						<mbsc-select formControlName="city" [options]="citySettings" #mbscRemoteDiv="mobiscroll" placeholder="Please Select..." disabled></mbsc-select>
+					</div>
+				</ion-col>
+			</ion-row>
+		    </mbsc-form-group>
+		    <ion-row>
+				<ion-col col-12 no-padding class="posRelative name-cont">
+					<div class="name-cont-inner posRelative">
+						<span class="error-cont" *ngIf="profileFormData.get('experience').hasError('required') && (profileFormData.get('experience').touched || displayError)" >
+							<ion-icon name="alert"></ion-icon>
+							<span class="error-hover">Required</span>
+						</span>
+						<ion-label stacked>Experience (in yrs) *</ion-label>
+						<ion-item no-padding class="item-name">
+							<ion-input type="text" placeholder="experience" formControlName="experience" ></ion-input>
+						</ion-item>
+					</div>
+				</ion-col>
+			</ion-row>
+		</fieldset>
+		<fieldset margin-bottom padding><legend>Professional details</legend>
+			<ion-row>
+				<ion-col col-12 no-padding class="posRelative name-cont">
+					<div class="name-cont-inner posRelative">
+						<span class="error-cont" *ngIf="profileFormData.get('speciality').hasError('required') && (profileFormData.get('speciality').touched || displayError)" >
+							<ion-icon name="alert"></ion-icon>
+							<span class="error-hover">Required</span>
+						</span>
+						<ion-label stacked>Speciality *</ion-label>
+						<mbsc-select formControlName="speciality" [options]="specialitySettings" [data]="specialityItems"></mbsc-select>
+						<!-- <ion-item no-padding class="item-name">
+							<ion-input type="text" placeholder="Speciality" formControlName="speciality" ></ion-input>
+						</ion-item> -->
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col col-12 no-padding class="posRelative name-cont">
+					<div class="name-cont-inner posRelative">
+						<span class="error-cont" *ngIf="profileFormData.get('medical_school').hasError('required') && (profileFormData.get('medical_school').touched || displayError)" >
+							<ion-icon name="alert"></ion-icon>
+							<span class="error-hover">Required</span>
+						</span>
+						<ion-label stacked>Medical School *</ion-label>
+						<mbsc-select formControlName="medical_school" [options]="medicalSchoolSettings" [data]="medicalSchoolItems"></mbsc-select>
+						<!-- <ion-item no-padding class="item-name">
+							<ion-input type="text" placeholder="Please specify" formControlName="medical_school" ></ion-input>
+						</ion-item> -->
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col col-6 no-padding class="posRelative name-cont">
+					<div class="name-cont-inner posRelative">
+						<span class="error-cont" *ngIf="profileFormData.get('degree').hasError('required') && (profileFormData.get('degree').touched || displayError)" >
+							<ion-icon name="alert"></ion-icon>
+							<span class="error-hover">Required</span>
+						</span>
+						<ion-label stacked>Degree *</ion-label>
+						<mbsc-select formControlName="degree" [options]="degreeSettings" [data]="degreeItems"></mbsc-select>
+						<!-- <ion-item no-padding class="item-name">
+							<ion-input type="text" placeholder="Speciality" formControlName="speciality" ></ion-input>
+						</ion-item> -->
+					</div>
+				</ion-col>
+				<ion-col col-6 no-padding class="posRelative name-cont">
+					<div class="name-cont-inner posRelative">
+						<span class="error-cont" *ngIf="profileFormData.get('year').hasError('required') && (profileFormData.get('year').touched || displayError)" >
+							<ion-icon name="alert"></ion-icon>
+							<span class="error-hover">Required</span>
+						</span>
+						<ion-label stacked>Year *</ion-label>
+						<mbsc-select formControlName="year" [options]="yearSettings" [data]="yearItems"></mbsc-select>
+						<!-- <ion-item no-padding class="item-name">
+							<ion-input type="text" placeholder="Speciality" formControlName="speciality" ></ion-input>
+						</ion-item> -->
+					</div>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col col-12 no-padding class="posRelative name-cont">
+					<div class="name-cont-inner posRelative">
+						<span class="error-cont" *ngIf="profileFormData.get('license_number').hasError('required') && (profileFormData.get('license_number').touched || displayError)" >
+							<ion-icon name="alert"></ion-icon>
+							<span class="error-hover">Required</span>
+						</span>
+						<ion-label stacked>License number *</ion-label>
+						<ion-item no-padding class="item-name">
+							<ion-input type="text" placeholder="Please specify" formControlName="license_number" ></ion-input>
+						</ion-item>
+					</div>
+				</ion-col>
+			</ion-row>
+			<mbsc-form-group>
+				<ion-row>
+					<ion-col col-6 no-padding class="posRelative name-cont">
+						<div class="name-cont-inner posRelative">
+							<span class="error-cont" *ngIf="profileFormData.get('license_country').hasError('required') && (profileFormData.get('license_country').touched || displayError)" >
+								<ion-icon name="alert"></ion-icon>
+								<span class="error-hover">Required</span>
+							</span>
+							<ion-label stacked>License country *</ion-label>
+							<mbsc-select formControlName="license_country" [options]="license_countrySettings" #mbscRemoteLicCoun="mobiscroll" placeholder="Please Select..."></mbsc-select>
+						</div>
+					</ion-col>
+					<ion-col col-6 no-padding class="posRelative name-cont">
+						<div class="name-cont-inner posRelative">
+							<span class="error-cont" *ngIf="profileFormData.get('license_state').hasError('required') && (profileFormData.get('license_state').touched || displayError)" >
+								<ion-icon name="alert"></ion-icon>
+								<span class="error-hover">Required</span>
+							</span>
+							<ion-label stacked>License State *</ion-label>
+							<mbsc-select formControlName="license_state" [options]="license_stateSettings" #mbscRemoteLicReg="mobiscroll" placeholder="Please Select..."></mbsc-select>
+						</div>
+					</ion-col>
+				</ion-row>
+			</mbsc-form-group>
+			<ion-row>
+				<ion-col col-12 no-padding class="posRelative name-cont">
+					<div class="name-cont-inner posRelative">
+						<span class="error-cont" *ngIf="profileFormData.get('license_expiry').hasError('required') && (profileFormData.get('license_expiry').touched || displayError)" >
+							<ion-icon name="alert"></ion-icon>
+							<span class="error-hover">Required</span>
+						</span>
+						<ion-label stacked>License expiry *</ion-label>
+						<ion-item no-padding class="item-name">
+							<ion-input type="text" placeholder="Please specify" formControlName="license_expiry" ></ion-input>
+						</ion-item>
+					</div>
+				</ion-col>
+			</ion-row>
+		</fieldset>
+		<fieldset margin-bottom padding><legend>Educational details</legend>
+		
+			<ion-row>
+				<ion-col col-12 no-padding>
+					<ion-row class="row-title" margin-bottom>
+						<ion-col col-8 no-padding class="posRelative name-cont">
+							&nbsp;
+						</ion-col>
+						<ion-col col-4 no-padding>
+							<button class="custom mini" ion-button block (click)="addEducation()">
+								Add new
+							</button>
+						</ion-col>
+					</ion-row>
+					<ion-row padding class="row-repeat" *ngFor="let edu of education; let in = index; let isOdd=odd; let isEven=even; let isLast=last" [class.odd]="isEven" [class.even]="isOdd" [class.last]="isLast" [class.first]="isFirst" class="edu-cont">
+						<ion-col col-6 no-padding padding-right class="edu-title-univ">
+							<div class="edu-title">{{edu.title}}</div>
+							<div class="edu-univ">{{edu.univ}}</div>
+						</ion-col>
+						<ion-col col-4 no-padding class="edu-image">
+							<div class="edu-image">
+								<img src="{{edu.images[0].originalpath}}" alt="" />
+							</div>
+						</ion-col>
+						<ion-col col-2 no-padding text-center padding-left class="edu-action">
+							<a href="javascript:void(0);" (click) = editEdu(in)>
+								<ion-icon name="create"></ion-icon>
+							</a>
+							<a href="javascript:void(0);" (click) = deleteEdu(in)>
+								<ion-icon name="trash" color="danger"></ion-icon>
+							</a>
+						</ion-col>
+					</ion-row>
+				</ion-col>
+				
+			</ion-row>
+		</fieldset>
+
+		<fieldset margin-bottom padding><legend>ID Proof</legend>
+			<ion-row>
+				<ion-col col-12 no-padding>
+					<ion-row class="row-title" margin-bottom>
+						<ion-col col-8 no-padding class="posRelative name-cont">
+							&nbsp;
+						</ion-col>
+						<ion-col col-4 no-padding>
+							<button class="custom mini" ion-button block (click)="addIDproof()">
+								Add new
+							</button>
+						</ion-col>
+					</ion-row>
+					<ion-row padding class="row-repeat" *ngFor="let proof of idproof; let in = index; let isOdd=odd; let isEven=even; let isLast=last" [class.odd]="isEven" [class.even]="isOdd" [class.last]="isLast" [class.first]="isFirst" class="edu-cont">
+						<ion-col col-6 no-padding padding-right class="edu-title-univ">
+							<div class="edu-title">{{proof.title}}</div>
+						</ion-col>
+						<ion-col col-4 no-padding class="edu-image">
+							<div class="edu-image">
+								<img src="{{proof.images[0].originalpath}}" alt="" />
+							</div>
+						</ion-col>
+						<ion-col col-2 no-padding text-center padding-left class="edu-action">
+							<a href="javascript:void(0);" (click) = editProof(in)>
+								<ion-icon name="create"></ion-icon>
+							</a>
+							<a href="javascript:void(0);" (click) = deleteIDproof(in)>
+								<ion-icon name="trash" color="danger"></ion-icon>
+							</a>
+						</ion-col>
+					</ion-row>
+				</ion-col>
+				
+			</ion-row>
+		</fieldset>
+
+	</form>
+	
+</ion-content>
+<ion-footer>
+	<ion-row>
+		<ion-col col-12 no-padding>
+			<button class="custom" [disabled] = "showSpinner" ion-button block (click)="submit()">
+		        <ion-spinner name="dots" class="white" *ngIf="showSpinner"></ion-spinner>&nbsp; Submit
+		    </button>
+		</ion-col>
+	</ion-row>
+</ion-footer>
+<mbsc-popup [options]="verifyPhonesettings" #verifyPhone="mobiscroll">
+
+	<ion-row>
+		<ion-col col-12 no-padding>
+			OTP has been sent your phone. <br>
+			Please enter the OTP that you received
+		</ion-col>
+	</ion-row>
+	<ion-row>
+		<ion-col col-12 no-padding class="verify-phone-input">
+
+			<input [(ngModel)]="verifyOtp" mbsc-numpad [mbsc-options]="numpadSettings" placeholder="Enter the OTP..." />
+
+		</ion-col>
+	</ion-row>
+	<ion-row>
+		<ion-col col-12>
+			<div *ngIf="showspinnerOTP" class="mbsc-lv-loading mbsc-show-lv-loading mp-text-green"><span
+					class="mbsc-ic mbsc-ic-loop2"></span></div>
+		</ion-col>
+	</ion-row>
+
+</mbsc-popup>

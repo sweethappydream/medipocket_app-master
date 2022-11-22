@@ -1,0 +1,57 @@
+<!--
+  Generated template for the PastRequestsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="bg1">
+	<ion-navbar>
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>Past Rx Request</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+
+	<mbsc-form class="md-schedule">
+		<div class="toggle-bar">
+			<mbsc-segmented-group [(ngModel)]="filters.range" (change)="onChange()">
+				<mbsc-segmented value="today">Today</mbsc-segmented>
+				<mbsc-segmented value="week">Last 7 Days</mbsc-segmented>
+				<mbsc-segmented value="custom" (click)="mbscRange.instance.show()">Custom</mbsc-segmented>
+			</mbsc-segmented-group>
+	
+			<div mbsc-range [(ngModel)]="filters.customRange" [mbsc-options]="rangeSettings" #mbscRange="mobiscroll" (onSet)="onChange()"></div>
+	
+		<!--	<mbsc-switch [(ngModel)]="filters.calls" (change)="onChange()">Show calls</mbsc-switch>
+			<mbsc-switch [(ngModel)]="filters.meetings" (change)="onChange()">Show meetings</mbsc-switch>-->
+		</div>
+		<mbsc-form-group no-margin>
+			<!--<mbsc-form-group-title>My Schedule</mbsc-form-group-title>-->
+			<div class="mbsc-empty" *ngIf="filteredData.length == 0 && !showspinner">
+				<h3>No Records Found !!!</h3>
+			</div>
+			<div *ngIf="showspinner" class="mbsc-lv-loading mbsc-show-lv-loading" ><span class="mbsc-ic mbsc-ic-loop2"></span></div>
+			<mbsc-listview [options]="listviewSettings" class="order-list">
+				<mbsc-listview-item col-12 padding *ngFor="let item of filteredData; let in = index; let isOdd=odd; let isEven=even; let isLast=last" [class.odd]="isEven" [class.even]="isOdd" [class.last]="isLast" [class.first]="isFirst" (click) = openOrder(item)>
+					<div class="status" text-right *ngIf="item.request_status == 'eprescription'">
+						Approved e-prescription
+					</div>
+					<div class="status" text-right *ngIf="item.request_status == 'need_consultation'">
+						Need consultation
+					</div>
+					<div class="patient-name">
+						Patient name: {{item.patient.name}}
+					</div>
+					<div class="datetime">
+						Request on: {{ parseUTCTime(item.created_on) }}
+					</div>
+					
+					
+				</mbsc-listview-item>
+			</mbsc-listview>
+		</mbsc-form-group>
+	</mbsc-form>
+</ion-content>

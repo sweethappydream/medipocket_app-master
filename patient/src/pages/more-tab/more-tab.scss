@@ -1,0 +1,24 @@
+page-more-tab {
+	.feedback_comment_input {
+		.text-input {
+			background: #000;
+			padding: 5px;
+			position: relative;
+			top: 250px;
+		}
+	}
+	.pop-page {
+		height: 100%;
+		ion-icon {
+			display: block;
+			height: 60px;
+			width: 60px;
+			text-align: center;
+			line-height: 60px;
+			font-size: 2em;
+			&:hover {
+				background: #efefef;
+			}
+		}
+	}
+}

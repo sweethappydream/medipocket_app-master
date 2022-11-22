@@ -1,0 +1,104 @@
+page-membership-card {
+	/* .custom-card {
+		background-image: url('../assets/imgs/medidelivery/membership-card.png');
+		width: 430px;
+		height: 412px;
+	}*/
+	.custom-card-cont {
+		position: relative;
+		color: #fff;
+		/* min-width: 430px;
+		max-width: 430px; */
+	}
+	.member {
+		position: absolute;
+	    right: 0px;
+	    top: 0px;
+	    width: 50%;
+	}
+	.type {
+		text-align: right;
+	    padding-top: 30px;
+	    padding-right: 18px;
+	    font-size: 2rem;
+	    text-transform: capitalize;
+	}
+	.name {
+	    font-size: 2.4rem;
+	    text-align: center;
+	    padding: 0px 16px 0px 16px;
+	    display: flex;
+	    /* position: absolute; */
+	    /* bottom: 0px; */
+	    height: 58px;
+	    align-items: flex-end;
+	    line-height: 22px;
+	    justify-content: center;
+	}
+	.memberid {
+		padding-top: 6px;
+	    padding-left: 16px;
+	    font-size: 1.5rem;
+	    line-height: 22px;
+	}
+	.memberid span.label {
+		width: 88px;
+	    display: inline-block;
+	    font-size: 1.6rem;
+	    
+	}
+	.member-row {
+		line-height: 23px;
+	}
+	.card-scroll-cont {
+		max-width: 430px;
+	}
+	@media only screen and (max-width: 500px) {
+	   .type {
+	   		text-align: right;
+		    padding-top: 6vw;
+		    padding-right: 4vw;
+		    font-size: 4vw;
+	   }
+	   .name {
+	   		font-size: 5vw;
+	   		line-height: 4vw;
+	   		padding: 0px 4vw;
+	   		height: 12vw;
+	   }
+	   .memberid {
+	   		font-size: 2vw;
+	   		line-height: 5vw;
+	   		padding-left: 4vw;
+	   }
+	   .custom-card-cont {
+	   		max-width: 430px;
+	   		position: relative;
+	   }
+	   .memberid span.label {
+			width: 18vw;
+		    display: inline-block;
+		    font-size: 3vw;
+		}
+		.member-row {
+			line-height: 5vw;
+    		font-size: 3vw;
+		} 
+
+	}
+
+	.share-button{
+		font-size: 1.2rem;
+    white-space: unset;
+	}
+	.toolbar-title {
+		font-size: 1.7rem;
+		font-weight: normal;
+		color: #fff;
+		text-transform: capitalize;
+		padding: 0px 0px 0px 10px;
+	}
+	.bg1 {
+		background: #109c8a !important;
+	}
+}

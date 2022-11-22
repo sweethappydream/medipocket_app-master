@@ -1,0 +1,77 @@
+<!--
+  Generated template for the OrderStatusPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="bg1">
+	<ion-navbar>
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>{{pageTitle}}</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+	<div class="order-cont" [ngClass]="pageAction">
+		<ion-row class="bg1" padding>
+			<ion-col col-12 no-padding class="order-id">
+				Order #{{currentOrder.order_id}}
+			</ion-col>
+			<ion-col col-12 no-padding class="patient-name" *ngIf = "currentOrder.patient">
+				Patient name : {{currentOrder.patient.name}}
+			</ion-col>
+		</ion-row>
+	</div>
+	<div class="drug-detail" *ngIf = "Object.keys(currentOrder.medications).length">
+		<ion-row>
+			<ion-col col-12 padding *ngFor="let drugkey of Object.keys(currentOrder.medications); let in = index; let isOdd=odd; let isEven=even; let isLast=last" [class.odd]="isEven" [class.even]="isOdd" [class.last]="isLast" [class.first]="isFirst" class="drug-single" (click) = toggleSelectDrug(in)>
+				<ion-row>
+					<ion-col col-10 no-padding>
+						<div class="drug-name">
+							{{currentOrder.medications[drugkey].LN}}
+						</div>
+						<div class="drug-spec">
+							{{currentOrder.medications[drugkey].QtySelected.qty}}&nbsp;{{currentOrder.medications[drugkey].DosageForm}},&nbsp;{{currentOrder.medications[drugkey].Strength}}
+							<!--{{drug.qty}} {{drug.dosage}}, {{drug.strength}} -->
+						</div>
+					</ion-col>
+					<ion-col col-2 no-padding text-right>
+						<ion-icon name="checkmark"></ion-icon>
+					</ion-col>
+				</ion-row>
+			</ion-col>
+
+		</ion-row>
+	</div>
+	<div class="order_status shadow" padding margin text-center *ngIf = "currentOrder.order_status == 'rejected-pharmacy'"> 
+		Status: Order rejected
+	</div>
+	<div class="order_status shadow" padding margin text-center *ngIf = "currentOrder.order_status == 'pharmacy-verified'"> 
+		Status: Order delivered
+	</div>
+	<!-- <div class="activities">
+		<ion-row padding-top class="status-cont">
+			<ion-col col-12 no-padding>
+				<ion-row class="bg-main header">
+					<ion-col col-6 no-padding>
+						Status
+					</ion-col>
+					<ion-col col-6 no-padding>
+						time
+					</ion-col>
+				</ion-row>
+				<ion-row *ngFor="let log of currentOrder.activities; let in = index; let isOdd=odd; let isEven=even; let isLast=last" [class.odd]="isEven" [class.even]="isOdd" [class.last]="isLast" [class.first]="isFirst" class="result">
+					<ion-col col-6 no-padding>
+						Order {{log.msg}}
+					</ion-col>
+					<ion-col col-6 no-padding>
+						{{timeago(log.create_at)}}
+					</ion-col>
+				</ion-row>
+			</ion-col>
+		</ion-row>	
+	</div> -->
+
+</ion-content>

@@ -1,0 +1,87 @@
+page-order-details {
+	.order-cont .bg1 {
+		border-top: 1px solid #fff;
+		color: #fff;
+	}
+	.order-id {
+		font-size: 1.8rem;
+	}
+	.drug-single {
+		border-bottom: 1px solid #cdcdcd;
+	}
+	.prescription-head {
+		font-size: 1.8rem;
+		color: #109c8a;
+	}
+	.custom.accept {
+		border: 1px solid #00d6ba;
+	}
+	.custom.reject {
+		border: 1px solid #fff;
+	}
+	.prescriptions .icon {
+		font-size: 2.4rem;
+	}
+	.prescriptions .shadow {
+		padding: 8px;
+		margin-bottom: 8px;
+		margin-left: 0px;
+		margin-right: 4px;
+	}
+	.prescriptions .shadow.even {
+		margin-left: 4px;
+	}
+
+	button.custom.accept, button.custom.accept:hover {
+		background: transparent;
+		border: 1px solid #00d6ba;
+		color: #109c8a;
+	}
+	button.custom.reject, button.custom.reject:hover {
+		background: transparent;
+		border: 1px solid #d15756;
+		color: #d15756;
+	}
+	.padding-right-mini {
+		padding-right: 8px !important;
+	}
+	.padding-left-mini {
+		padding-left: 8px  !important;
+	}
+	#drug-container {
+
+	}
+	.bg-white {
+		background: #fff;
+	}
+	.auth .id {
+		color: #109c8a;
+		font-size: 2.4rem;
+	}
+	.modify-drugs {
+		padding: 8px;
+	}
+	.modify-drugs a {
+		font-size: 1.2rem;
+    	text-decoration: none;
+    	color: #109c8a;
+	}
+	.pickup-notify-message {
+	    color: #109c8a;
+	    text-align: center;
+	}
+
+	.heading {
+		text-decoration: underline;
+		color: #109c8a;
+		text-transform: uppercase;
+		font-size: 1.2rem;
+	}
+	.checkbox .checkbox-checked {
+		background: #109c8a;
+		border-color: #109c8a;
+	}
+	.drug-name{
+		text-transform: capitalize;
+	}
+}

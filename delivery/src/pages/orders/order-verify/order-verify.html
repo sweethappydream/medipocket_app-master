@@ -1,0 +1,108 @@
+<!--
+  Generated template for the OrderVerifyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="bg1">
+  <ion-navbar>
+    <ion-title>{{pageTitle}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+	<div class="order-cont" [ngClass]="pageAction" margin-top padding-top>
+		<ion-row>
+			<ion-col col-12 no-padding class="order-id" text-center>
+				Order #{{currentOrder.order_id || "MP4321"}}
+			</ion-col>
+			<ion-col col-12 no-padding class="order-id" text-center>
+				Pay: ${{amountToPay.totalPrice | number : '1.2-2' }}
+				</ion-col>
+			<ion-col col-12 no-padding class="patient-name" text-center>
+				Patient Name : {{patientInfo.name || "Patient Name"}}
+			</ion-col>
+		</ion-row>
+	</div>
+
+	<div id="verification" margin padding-top>
+		<ion-row class="shadow" padding text-center margin-top  *ngIf = "pageAction == 'pickup' && orderVerified == false">
+			<ion-col col-12 no-padding>
+				Verification Code
+			</ion-col>
+			<ion-col col-12 no-padding class="code">
+				{{currentOrder.verify_pharmacy_code || "MP1234"}}
+
+			</ion-col>
+			
+			<ion-col col-12 no-padding class="">
+				<p>
+					Provide above verification code to pharmacy to verify and pick the package.
+				</p>	
+				</ion-col>
+
+		</ion-row>
+		<ion-row class="shadow" padding  margin-top *ngIf="pageAction == 'pickup' && orderVerified == true">
+			<ion-col col-12 no-padding class="">
+				<p class="mp-text-green">
+					Please fill the amount that you paid at Phamracy. Tap proceed to delivery.
+				</p>
+			</ion-col>
+			<ion-col col-12 no-padding>
+						
+						<ion-input  placeholder="Amount paid"  [(ngModel)]="amountPaid" type="number" value=""></ion-input>
+			</ion-col>
+		</ion-row>					
+
+		<ion-row *ngIf = "pageAction == 'delivery'">
+			<ion-col col-12 no-padding>
+				<form [formGroup]="deliveryFormData">
+					<ion-row>
+						<ion-col col-12 no-padding class="posRelative">
+							<span class="error-cont" *ngIf="deliveryFormData.get('code').hasError('required') && (deliveryFormData.get('code').touched || displayError)" >
+								<ion-icon name="alert"></ion-icon>
+								<span class="error-hover">Required</span>
+							</span>
+							<ion-label stacked>&nbsp;</ion-label>
+							<ion-item no-padding class="item-name" text-center>
+								<ion-input type="text" placeholder="Delivery verification code" formControlName="code" text-center [disabled] = "codeSuccess"></ion-input>
+							</ion-item>
+						</ion-col>
+						<ion-col col-12 no-padding padding-top text-center>
+							<button ion-button class="custom white" (click) = "verifyDeliveryCode()" [disabled] = "codeSuccess">Verify</button>
+						</ion-col>
+						<ion-col col-12 no-padding padding-top text-center *ngIf = "codeError" class="error-msg">
+							{{errorMsg}}
+						</ion-col>
+						<ion-col col-12 no-padding padding-top text-center *ngIf = "codeSuccess" class="success-msg">
+							{{successMsg}}
+						</ion-col>
+					</ion-row>
+				</form>
+			</ion-col>
+		</ion-row>
+	</div>
+</ion-content>
+<ion-footer>
+	
+	
+	<!--(click) = "goto('delivery')"-->
+	<button ion-button class="custom" color="danger" [disabled]="showspinner" full (click) = verifyWithPharmacy()  *ngIf = "pageAction == 'pickup' && orderVerified == false">
+		Verify & Pickup
+		<div  *ngIf="showspinner" class="mbsc-lv-loading mbsc-show-lv-loading map-location-css" >
+			<span class="mbsc-ic mbsc-ic-loop2 text-white"></span>
+		</div>
+	</button>
+	<button ion-button class="custom" color="danger" [disabled]="showspinner" full (click) = "goto('delivery')"  *ngIf = "pageAction == 'pickup' && orderVerified == true">
+			Proceed Delivery
+			<div  *ngIf="showspinner" class="mbsc-lv-loading mbsc-show-lv-loading map-location-css" >
+					<span class="mbsc-ic mbsc-ic-loop2 text-white"></span>
+				</div>
+		</button>
+	<button ion-button class="custom" color="danger" full (click) = "goto('success')" [disabled] = "!patientVerified || showspinner" *ngIf = "pageAction == 'delivery'">
+		Delivered
+		<div  *ngIf="showspinner" class="mbsc-lv-loading mbsc-show-lv-loading map-location-css" >
+				<span class="mbsc-ic mbsc-ic-loop2 text-white"></span>
+			</div>
+	</button>
+</ion-footer>

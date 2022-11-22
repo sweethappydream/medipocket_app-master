@@ -1,0 +1,180 @@
+<!--
+  Generated template for the OrderDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="bg1">
+  <ion-navbar>
+    <ion-title>{{pageTitle}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+	<div class="order-cont" [ngClass]="pageAction">
+		<ion-row class="bg1" padding>
+			<ion-col col-12 no-padding class="order-id">
+				Order #{{currentOrder.order_id}}
+			</ion-col>
+			<ion-col col-12 no-padding class="patient-name" *ngIf="currentOrder.patient">
+				Patient name : {{currentOrder.patient.name}}
+			</ion-col>
+		</ion-row>
+	</div>
+	<div id="drug-container" *ngIf = "showDrugcont else showAuthcont">
+		<div class="drug-detail delivered" margin-bottom *ngIf = "Object.keys(modifiedOrder.medications.delivered).length">
+			<ion-row padding-top *ngIf = "currentOrder.order_status != 'pharmacy-verified'">
+				<ion-col col-12 no-padding text-center class="heading">
+					Drugs already delivered
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col col-12 padding *ngFor="let drugkey of Object.keys(modifiedOrder.medications.delivered); let in = index; let isOdd=odd; let isEven=even; let isLast=last" [class.odd]="isEven" [class.even]="isOdd" [class.last]="isLast" [class.first]="isFirst" class="drug-single" (click) = toggleSelectDrug(in)>
+					<ion-row>
+						<ion-col col-12 no-padding>
+							<div class="drug-name">
+								{{modifiedOrder.medications.delivered[drugkey].LN}}
+							</div>
+							<div class="drug-spec">
+								{{modifiedOrder.medications.delivered[drugkey].QtySelected.qty}}&nbsp;{{modifiedOrder.medications.delivered[drugkey].DosageForm}},&nbsp;{{modifiedOrder.medications.delivered[drugkey].Strength}}
+								<!--{{drug.qty}} {{drug.dosage}}, {{drug.strength}} -->
+							</div>
+						</ion-col>
+					</ion-row>
+				</ion-col>
+
+			</ion-row>
+		</div>
+		<div class="drug-detail" *ngIf = "Object.keys(modifiedOrder.medications.undelivered).length">
+			<ion-row padding-top *ngIf = "Object.keys(modifiedOrder.medications.delivered).length">
+				<ion-col col-12 no-padding text-center class="heading">
+					Drugs not yet packed for delivery
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col col-12 padding *ngFor="let drugkey of Object.keys(modifiedOrder.medications.undelivered); let in = index; let isOdd=odd; let isEven=even; let isLast=last" [class.odd]="isEven" [class.even]="isOdd" [class.last]="isLast" [class.first]="isFirst" class="drug-single" (click) = toggleSelectDrug(in)>
+					<ion-row>
+						<ion-col col-10 no-padding>
+							<div class="drug-name">
+								{{modifiedOrder.medications.undelivered[drugkey].LN}}
+							</div>
+							<div class="drug-spec">
+								{{modifiedOrder.medications.undelivered[drugkey].QtySelected.qty}}&nbsp;{{modifiedOrder.medications.undelivered[drugkey].DosageForm}},&nbsp;{{modifiedOrder.medications.undelivered[drugkey].Strength}}
+								<!--{{drug.qty}} {{drug.dosage}}, {{drug.strength}} -->
+							</div>
+						</ion-col>
+						<ion-col col-2 no-padding text-right>
+							<ion-checkbox [(ngModel)]="modifiedOrder.medications.undelivered[drugkey].selected"></ion-checkbox>
+						</ion-col>
+					</ion-row>
+				</ion-col>
+
+			</ion-row>
+			<ion-row *ngIf="currentOrder.order_status != 'pending-pharmacy'">
+				<ion-col col>
+					<a href="javascript:void(0)" (click)="register.instance.show()" class="mp-text-green">
+						If any of the medicine in the list is not available, To let patient know tap here. 	
+					</a>
+				</ion-col>
+			</ion-row>
+
+			<ion-row *ngIf="currentOrder.order_status == 'pending-pharmacy'">
+				<ion-col col text-center>
+					<a href="javascript:void(0)" class="mp-text-green">
+						Waiting for patient action.
+					</a>
+				</ion-col>
+			</ion-row>
+
+		</div>
+		<!-- <div class="prescriptions" margin-top padding-top *ngIf = "this.prescriptions.length">
+			<ion-row class="prescription-head" margin-bottom>
+				<ion-col col-12 no-padding text-center>
+					Prescriptions
+				</ion-col>
+			</ion-row>
+			<ion-row margin-left margin-right>
+				<ion-col col-6 *ngFor="let single of prescriptions; let in = index; let isOdd=odd; let isEven=even; let isLast=last" [class.odd]="isEven" [class.even]="isOdd" [class.last]="isLast" [class.first]="isFirst" class="shadow" (click) = openPrescription(in)>
+					<div class="single-name">
+						<img [src]="single.originalpath" alt="prescription" (click) = "viewImage(single.originalpath)"/>
+					</div>
+				</ion-col>
+
+			</ion-row>
+		</div> -->
+		<div class="action-cont" margin-top padding-left padding-right padding-bottom *ngIf = "Object.keys(modifiedOrder.medications.undelivered).length && currentOrder.order_status != 'pending-pharmacy'">
+			<ion-row *ngIf = "dynamicStatus != 'pharmacy-verified-partial'">
+				<ion-col col-6 no-padding class="padding-right-mini">
+					<button ion-button class="custom reject" full (click) = "promptRejectOrder()" [disabled] = "rejectClick"><ion-spinner name="dots" class="dark" *ngIf="rejectClick"></ion-spinner>&nbsp;Reject</button>
+				</ion-col>
+				<ion-col col-6 no-padding class="padding-left-mini">
+					<button ion-button class="custom accept" full (click) = "promptAcceptOrder()" [disabled] = "acceptClick"><ion-spinner name="dots" class="dark" *ngIf="acceptClick"></ion-spinner>&nbsp;Accept</button>
+				</ion-col>
+			</ion-row>
+			<ion-row *ngIf = "dynamicStatus == 'pharmacy-verified-partial'">
+				<ion-col col-12 no-padding class="padding-right-mini">
+					<button ion-button class="custom accept" full (click) = "acceptOrder()" [disabled] = "acceptClick"><ion-spinner name="dots" class="dark" *ngIf="acceptClick"></ion-spinner>&nbsp;Accept</button>
+				</ion-col>
+			</ion-row>
+		</div>
+	</div>
+	<ng-template #showAuthcont>
+		<div class="modify-drugs" text-right *ngIf="1 != 1">
+			<a href="javascript: void(0);" (click) = "modifyDrugs()">Modify drug selection</a>
+		</div>
+		<div class="drug-detail" *ngIf = "Object.keys(modifiedOrder.medications.undelivered).length">
+			<ion-row>
+				<ion-col col-12 no-padding *ngFor="let drugkey of Object.keys(modifiedOrder.medications.undelivered); let in = index; let isOdd=odd; let isEven=even; let isLast=last" [class.odd]="isEven" [class.even]="isOdd" [class.last]="isLast" [class.first]="isFirst">
+					<ion-row *ngIf = "modifiedOrder.medications.undelivered[drugkey].selected" class="drug-single" padding>
+						<ion-col col-10 no-padding>
+							<div class="drug-name">
+								{{modifiedOrder.medications.undelivered[drugkey].LN}}
+							</div>
+							<div class="drug-spec">
+								{{modifiedOrder.medications.undelivered[drugkey].QtySelected.qty}}&nbsp;{{modifiedOrder.medications.undelivered[drugkey].DosageForm}},&nbsp;{{modifiedOrder.medications.undelivered[drugkey].Strength}}
+							</div>
+						</ion-col>
+						<ion-col col-2 no-padding text-right>
+							<ion-checkbox [(ngModel)]="modifiedOrder.medications.undelivered[drugkey].selected" [disabled] = true color = "secondary"></ion-checkbox>
+						</ion-col>
+					</ion-row>
+				</ion-col>
+			</ion-row>
+		</div>
+		<!-- <div class="auth" class="shadow bg-white auth" margin>
+			<ion-row padding>
+				<ion-col col-12 no-padding text-center>
+					Authorisation Id
+				</ion-col>
+				<ion-col col-12 no-padding text-center class="id">
+					{{authid}}
+				</ion-col>
+			</ion-row>
+		</div> -->
+		<div class="pickup-notify-message" margin-top *ngIf = "!assignedPilot.assigned && currentOrder.order_status == 'ready-to-pickup'" padding-left padding-right>
+			Pickup staff is not assigned for this order yet, please click the button below to get the status.
+		</div>
+	</ng-template>
+</ion-content>
+<ion-footer *ngIf="!showDrugcont">
+	<ion-row>
+		<ion-col col-12 no-padding class="padding-right-mini">
+			<button ion-button class="custom" full (click) = "goto('pickup')" *ngIf = "currentOrder.order_status == 'accepted-pharmacy'" [disabled] = "pickupClick"><ion-spinner name="dots" class="white" *ngIf="pickupClick"></ion-spinner>&nbsp;Ready for Pickup</button>
+			<button ion-button class="custom" full (click) = "getDeliveryStaff()" *ngIf = "!assignedPilot.assigned && (currentOrder.order_status == 'ready-to-pickup' || currentOrder.order_status == 'pickup-accepted')" [disabled] = "getPilotClick"><ion-spinner name="dots" class="white" *ngIf="getPilotClick"></ion-spinner>&nbsp;Get delivery staff details</button>
+			<button ion-button class="custom" full (click) = "goto('deliverydrugs')" *ngIf = "assignedPilot.assigned && (currentOrder.order_status == 'ready-to-pickup' || currentOrder.order_status == 'pickup-accepted')">Deliver drugs</button>
+		</ion-col>
+	</ion-row>
+</ion-footer>
+
+<mbsc-popup [options]="settings" #register="mobiscroll">
+	<ion-row>
+	<ion-col col-12 no-padding>
+			<ion-textarea [(ngModel)]="pendingMsg" row=5 placeholder="Let patient know when it will be ready or if any other info"></ion-textarea>
+		</ion-col>
+	</ion-row>	
+	<ion-row>
+		<ion-col col-12 no-padding>
+			<small> you an reject the order, if needed.</small>
+		</ion-col>
+	</ion-row>		
+</mbsc-popup>

@@ -1,0 +1,97 @@
+auto-complete {
+	
+	.searchbar .searchbar-input {
+		text-transform: capitalize;
+	}
+	.search-result-cont {
+		position: absolute;
+		width: 100%;
+		left: 0px;
+		z-index: 9;
+	}
+	.autocomplete_results {
+		max-height: 200px;
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
+	.ac-label, .ac-sub {
+		display: block;
+	}
+	.ac-label {
+		font-size: 1.4rem;
+		text-transform: capitalize;
+	}
+	.ac-sub {
+		font-size: 1.2rem;
+	}
+	.search-result-cont .item {
+		border-bottom: 1px solid #cdcdcd;
+		padding-left: 55px;
+	}
+	.search-result-cont .item .item-inner {
+		border-bottom: none;
+	}
+	.search-result-cont .item .item-inner .label {
+		margin: 8px 8px 8px 0px;
+	}
+	.search-result-cont .list {
+		border-top: 1px solid #cdcdcd;
+	}
+	.spinner-cont {
+		position: absolute;
+	    z-index: 9;
+	    background: #fff;
+	    padding: 5px 10px;
+	}
+	.search-result-cont .item.item-ios {
+	    padding-left: 30px;
+	}
+	.searchbar-ios {
+	    min-height: auto;
+	}
+	.searchbar-cont .spinner-cont{
+		padding: 0px;
+		top: 4px;
+		left: 4px;
+	}
+	.colorblue{
+	  	color: #00d6ba !important;
+	}
+	.borderblue{
+		border-color: #00d6ba !important;
+	}
+	.font1-4rem{
+		font-size: 1.4rem;
+	}
+	.font1-2rem{
+		font-size: 1.2rem;
+	}
+	.pickbutton{
+		padding: 2px;
+		margin-right: 5px;
+		button{
+			padding: 2px !important;
+			margin: 0 !important;
+		}
+	}
+	.pharmGroupPriceData{
+		.pharmacy_name{
+
+		}
+		.pharmacy_address{
+			font-size: 1.2rem;
+		}
+		.pharmacy_distance{
+			font-size: 1.2rem;
+		}
+		.pharmacy_price{
+
+		}
+	}
+
+	
+
+	
+	
+}
+

@@ -1,0 +1,129 @@
+<!--
+  Generated template for the DrugSpecPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="bg1">
+  <ion-navbar>
+    <ion-title padding-left>Select Medicine</ion-title>
+    <ion-buttons end>
+		<button ion-button icon-only (click)="dismiss()">
+			<ion-icon name="close"></ion-icon>
+		</button>
+    </ion-buttons>
+  </ion-navbar>
+  <div class="patient-details" padding-bottom>
+        <div class="name" text-center>
+            Patient name: {{currOrder.patient.name}}
+        </div>
+    </div>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]="drugFormData">
+        <div class="drug-cont shadow" padding>
+            <ion-row>
+                <ion-col col-12 no-padding class="posRelative drug-name">
+                    {{drugSelected.LN}}&nbsp;&nbsp;<span class="edit" (click)="variations.instance.show();" id="showVariations"><ion-icon name="ios-create-outline"></ion-icon>&nbsp;change</span>
+                </ion-col>
+            </ion-row>
+           <ion-row>
+                <ion-col col-12 no-padding class="posRelative name-cont">
+                    <div class="name-cont-inner posRelative">
+                        <span class="error-cont" *ngIf="drugFormData.get('mg').hasError('required') && (drugFormData.get('mg').touched || displayError)" >
+                            <ion-icon name="alert"></ion-icon>
+                            <span class="error-hover">Required</span>
+                        </span>
+                        <ion-label stacked>Mg Selection *</ion-label>
+                        <ion-item no-padding class="item-name">
+                            <ion-input type="text" placeholder="mg" formControlName="mg" ></ion-input>
+                        </ion-item>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-12 no-padding class="posRelative name-cont">
+                    <div class="name-cont-inner posRelative">
+                        <span class="error-cont" *ngIf="drugFormData.get('type').hasError('required') && (drugFormData.get('type').touched || displayError)" >
+                            <ion-icon name="alert"></ion-icon>
+                            <span class="error-hover">Required</span>
+                        </span>
+                        <ion-label stacked>Type *</ion-label>
+                        <ion-item no-padding class="item-name">
+                            <ion-input type="text" placeholder="type" formControlName="type" ></ion-input>
+                        </ion-item>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-12 no-padding class="posRelative name-cont">
+                    <div class="name-cont-inner posRelative">
+                        <span class="error-cont" *ngIf="drugFormData.get('qty').hasError('required') && (drugFormData.get('qty').touched || displayError)" >
+                            <ion-icon name="alert"></ion-icon>
+                            <span class="error-hover">Required</span>
+                        </span>
+                        <ion-label stacked>Quantity to prescription *</ion-label>
+                        <ion-item no-padding class="item-name">
+                            <ion-input type="text" placeholder="Quantity" formControlName="qty" ></ion-input>
+                        </ion-item>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-3 class="posRelative name-cont">
+                    <div class="name-cont-inner posRelative">
+                        <ion-label stacked>Morning</ion-label>
+                        <ion-item no-padding class="item-name">
+                            <ion-input type="text" placeholder="" formControlName="morning" ></ion-input>
+                        </ion-item>
+                    </div>
+                </ion-col>
+                <ion-col col-3 class="posRelative name-cont">
+                    <div class="name-cont-inner posRelative">
+                        <ion-label stacked>Noon</ion-label>
+                        <ion-item no-padding class="item-name">
+                            <ion-input type="text" placeholder="" formControlName="noon" ></ion-input>
+                        </ion-item>
+                    </div>
+                </ion-col>
+                <ion-col col-3 class="posRelative name-cont">
+                    <div class="name-cont-inner posRelative">
+                        <ion-label stacked>Evening</ion-label>
+                        <ion-item no-padding class="item-name">
+                            <ion-input type="text" placeholder="" formControlName="evening" ></ion-input>
+                        </ion-item>
+                    </div>
+                </ion-col>
+                <ion-col col-3 class="posRelative name-cont">
+                    <div class="name-cont-inner posRelative">
+                        <ion-label stacked>Night</ion-label>
+                        <ion-item no-padding class="item-name">
+                            <ion-input type="text" placeholder="" formControlName="night" ></ion-input>
+                        </ion-item>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row margin-top>
+                <ion-col col-3 no-padding>
+                    &nbsp;
+                </ion-col>
+                <ion-col col-6 no-padding class="posRelative name-cont">
+                    <button class="custom" ion-button block (click)="addDrug()">
+                        Add
+                    </button>
+                </ion-col>
+                <ion-col col-3 no-padding>
+                    &nbsp;
+                </ion-col>
+            </ion-row>
+        </div>
+    </form>
+    <mbsc-popup [options]="variationsSettings" #variations="mobiscroll" >
+      <mbsc-listview [options]="lvSettings">
+          <mbsc-listview-item *ngFor="let item of predictions" (click)="updateDrugSelection(item);variations.instance.hide();">
+              {{ item.BN }} &nbsp;{{ item.Strength }} &nbsp;{{ item.DosageForm }} &nbsp;
+          </mbsc-listview-item>
+      </mbsc-listview>
+    </mbsc-popup>
+</ion-content>

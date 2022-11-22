@@ -1,0 +1,49 @@
+page-active-order-details {
+	.shadow {
+		background: #fff;
+	}
+	.icon-cont {
+		font-size: 5rem;
+		color: #b2b2b2;
+	}
+	.button.custom.accept {
+		color: #b2b2b2;
+		border-right: 1px solid #e4d8d8;
+		background: #f6f6f6;
+		box-shadow: none;
+	}
+	.button.custom.reject {
+		color: red;
+		background: #f6f6f6;
+		box-shadow: none;
+	}
+	.orderid-cont {
+		font-size: 2rem;
+	}
+	.pickup-row, .delivery-row {
+		border-bottom: 1px solid #00d6ba;
+	}
+	.cancel-order a {
+		text-decoration: none;
+		color: red;
+	}
+	.cancel-order {
+		display: flex;
+		justify-content: left;
+		align-items: center;
+	}
+	.status-cont {
+		border-top: 1px solid #00d6ba;
+	}
+	.bg-white {
+		background: #fff;
+	}
+	.status-cont .header {
+		background: #cdcdcd;
+    	color: #000
+	}
+	.status-cont .header .col, .status-cont .result .col {
+		padding: 8px;
+		font-size: 1.3rem;
+	}
+}

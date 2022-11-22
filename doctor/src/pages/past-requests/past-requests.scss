@@ -1,0 +1,65 @@
+page-past-requests {
+	.patient-name {
+		font-size: 1.5rem;
+		color: #00d6ba;
+	}
+	.shadow {
+		background: #fff;
+	}
+	.icon-cont {
+		font-size: 5rem;
+		color: #b2b2b2;
+	}
+	.button.custom, .button.custom:hover {
+		background: #f6f6f6;
+		box-shadow: none;
+	}
+	.button.custom.accept {
+		color: #b2b2b2;
+		border-right: 1px solid #e4d8d8;
+	}
+	.button.custom.reject {
+		color: red;
+	}
+	.mbsc-ios.mbsc-form, .mbsc-ios .mbsc-lv {
+		background: none;
+	}
+	.mbsc-ios .mbsc-lv-item:before, .mbsc-ios .mbsc-lv-item:after, .mbsc-ios .mbsc-lv-item:before, .mbsc-ios .mbsc-lv-item:after {
+		border: 0px;
+	}
+	.mbsc-ios .mbsc-lv-item {
+		border-bottom: 1px solid #00d6ba;
+		margin-top: 0px;
+	}
+	.mbsc-ios .mbsc-segmented .mbsc-segmented-item.mbsc-stepper-control.mbsc-active .mbsc-segmented-content, .mbsc-ios .mbsc-segmented .mbsc-segmented-item input:checked+.mbsc-segmented-content {
+		background: #00d6ba;
+	}
+	.mbsc-ios .mbsc-segmented-content {
+		border: .07142857em solid #00d6ba;
+	}
+	.mbsc-ios .mbsc-segmented-content {
+		color: #00d6ba;
+	}
+	.mbsc-ios .mbsc-segmented .mbsc-segmented-item input.mbsc-active+.mbsc-segmented-content {
+		color: #fff;
+	}
+	.mbsc-ios .mbsc-segmented {
+		background-color: #fff;
+    	padding: 0px;
+	}
+	.mbsc-empty {
+		font-size: 1.2rem;
+	}
+	.mbsc-ios.mbsc-lv-cont {
+		margin-top: 0px;
+	}
+	.toggle-bar {
+		border-bottom: 1px solid #00d6ba;
+	}
+	.mbsc-ios .mbsc-lv-loading .mbsc-ic {
+		color: #00d6ba;
+	}
+	.toggle-bar {
+		padding: 10px 16px;
+	}
+}

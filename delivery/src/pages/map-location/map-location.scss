@@ -1,0 +1,80 @@
+page-map-location {
+	#map {
+		height: 100%;
+		width: 100%;
+	}
+	#map_cont {
+		position: relative;
+	}
+	.duration_cont {
+		position: absolute;
+	    z-index: 9;
+	    background: #fff;
+	    padding: 8px 12px;
+	    margin: 12px;
+	    border-radius: 4px;
+	    top: 25%;
+		font-size: 1.2rem;
+		/*border: 3px solid #3dcfbe;*/
+		box-shadow: #cccccc 1px 1px 1px 1px;
+	}
+	.pharmacy_location_outer, .patient_location_outer {
+		position: absolute;
+		width: 100%;
+		z-index: 9;
+		width: 100%;
+		
+	}
+	.map-location-css{
+		position: absolute;
+		width: 100%;
+		z-index: 11;
+		padding-top: 51% !important;
+    /* top: 50%; */
+    background: #5c5c5c;
+    height: 100% !important;
+    opacity: 0.7 !important;
+	}
+	.pharmacy_location_outer {
+		padding: 16px;
+	}
+	.patient_location_outer .bg1 {
+		border-top: 1px solid #fff;
+		color: #fff;
+	}
+	.pharmacy_location, .patient_location {
+		padding: 8px;
+		text-align: center;
+		background: #fff;
+		/*border: 3px solid #3dcfbe; */
+		box-shadow: #cccccc 1px 1px 1px 1px;
+	}
+	.pharmacy_location .name, .patient_location .name {
+		color: #3dcfbe;
+		font-size: 2.2rem;
+	}
+	.drive_outer {
+		position: absolute;
+		width: 100%;
+		bottom: 12px;
+	}
+	.drive {
+		justify-content: center;
+		display: flex;
+	}
+	.drive .button {
+		/*width: 100px;*/
+	}
+	#map_cont {
+	    height: 100%;
+	    width: 100%;
+	}
+	.patient_details_cont {
+		color: #fff;
+	    border-top: 1px solid #fff;
+	    font-size: 1.6rem;
+	}
+	.button.mp {
+		background: #00d6ba;
+	}
+}

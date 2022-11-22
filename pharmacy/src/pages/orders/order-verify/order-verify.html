@@ -1,0 +1,79 @@
+<!--
+  Generated template for the OrderVerifyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header class="bg1">
+  <ion-navbar>
+    <ion-title>{{pageTitle}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+	<div class="order-cont" [ngClass]="pageAction">
+		<ion-row  class="bg1" padding>
+			<ion-col col-12 no-padding class="order-id" >
+				Order #{{currentOrder.order_id}}
+			</ion-col>
+			<ion-col col-12 no-padding class="patient-name">
+				Patient name : {{currentOrder.patient.name}}
+			</ion-col>
+		</ion-row>
+	</div>
+
+	<div id="verification" margin padding-top>
+		<ion-row class="pickup-heading">
+			<ion-col col-12 no-padding text-center>
+				Pickup Person Details
+			</ion-col>
+		</ion-row>
+		<ion-row class="pickup-image">
+			<ion-col col-12 no-padding text-center>
+				<div class="avatar-cont" margin-top margin-bottom>
+					<img src="{{currentOrder.delivery.avatar.originalpath}}" alt="avatar" />
+				</div>
+			</ion-col>
+		</ion-row>
+		<ion-row class="pickup-name">
+			<ion-col col-12 no-padding text-center>
+				{{currentOrder.delivery.name}}
+			</ion-col>
+		</ion-row>
+		<!-- <ion-row class="pickup-identity">
+			<ion-col col-12 no-padding text-center>
+				{{currentOrder.pilot.identity.name}} #: {{currentOrder.pilot.identity.id}}
+			</ion-col>
+		</ion-row> -->
+		<ion-row *ngIf = "pageAction == 'pickup'">
+			<ion-col col-12 no-padding>
+				<form [formGroup]="pickupFormData">
+					<ion-row>
+						<ion-col col-12 no-padding class="posRelative">
+							<span class="error-cont" *ngIf="pickupFormData.get('code').hasError('required') && (pickupFormData.get('code').touched || displayError)" >
+								<ion-icon name="alert"></ion-icon>
+								<span class="error-hover">Required</span>
+							</span>
+							<ion-label stacked>&nbsp;</ion-label>
+							<ion-item no-padding class="item-name" text-center>
+								<ion-input type="text" placeholder="Pickup verification code" formControlName="code" text-center [disabled] = "codeSuccess"></ion-input>
+							</ion-item>
+						</ion-col>
+						<ion-col col-12 no-padding padding-top text-center>
+							<button ion-button class="custom white" (click) = "verifyPickupCode()" [disabled] = "codeSuccess">Verify</button>
+						</ion-col>
+						<ion-col col-12 no-padding padding-top text-center *ngIf = "codeError" class="error-msg">
+							{{errorMsg}}
+						</ion-col>
+						<ion-col col-12 no-padding padding-top text-center *ngIf = "codeSuccess" class="success-msg">
+							{{successMsg}}
+						</ion-col>
+					</ion-row>
+				</form>
+			</ion-col>
+		</ion-row>
+	</div>
+</ion-content>
+<ion-footer>
+	<button ion-button class="custom" color="danger" full (click) = "goto('success')" *ngIf = "pageAction == 'pickup'" [disabled] = disableCompleted>Completed</button>
+</ion-footer>

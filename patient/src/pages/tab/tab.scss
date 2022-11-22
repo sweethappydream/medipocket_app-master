@@ -1,0 +1,70 @@
+page-tab {
+	.tabs-md .tabbar {
+		background: #109c8a !important;
+	}
+
+	.tabs-md .tab-button-icon {
+		font-size: 1.8 !important;
+	}
+	.tab-button-text,
+	.tab-button-icon {
+		min-width: 35px !important;
+	}
+
+	a#tab-t0-2 {
+		overflow: unset;
+		ion-icon {
+			position: relative;
+			font-size: 2.5em !important;
+		}
+	}
+	a#tab-t1-2 {
+		overflow: unset;
+		margin-top: -3.8rem;
+		ion-icon {
+			position: relative;
+			font-size: 3.5em !important;
+			color: #f43d69;
+		}
+	}
+	.tabs-md .tab-button-icon {
+		color: #fff;
+	}
+	a#tab-t0-2:hover {
+		background: #109c8a !important;
+		opacity: 1;
+	}
+	.tabs-md .tab-button-icon {
+		margin-top: 1px;
+		font-size: 2em !important;
+		position: relative;
+		color: #fff;
+	}
+	ion-icon.tab-button-icon.icon.icon-md.ion-md-search {
+		position: relative;
+		top: -5px;
+	}
+	.tabs-md .tab-button[aria-selected='true'] .tab-button-icon {
+		color: #fff;
+		-webkit-transform: translate3d(0, -2px, 0);
+		transform: translate3d(0, -2px, 0);
+	}
+	.tabs-md .tab-button[aria-selected='true'] {
+		color: #ddd;
+	}
+	.tabs-md .tab-button {
+		color: #fff;
+	}
+	.tabs-md .tab-button-text {
+		font-size: 1rem;
+	}
+	.heart_icon {
+		color: #f43d69;
+		font-size: 50px !important;
+	}
+	.popover-content {
+		position: absolute !important;
+		right: 5px !important;
+		bottom: 0 !important;
+	}
+}
